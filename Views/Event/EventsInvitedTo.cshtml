@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DB.Event>
+
+@{
+    ViewBag.Title = "EventsInvitedTo";
+}
+
+<h2>Event invited to</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Title, "Details", "Home", new { id = item.EventID }, htmlAttributes: new { @class = " " })
+            </td>
+        </tr>
+    }
+
+</table>

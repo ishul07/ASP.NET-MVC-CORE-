@@ -1,0 +1,55 @@
+﻿@model   IEnumerable<DB.Event>
+
+@{
+    ViewBag.Title = "Index";
+}
+<header class="navbar">
+    <ul>
+        <li>
+            <a href="/User/Create" class="btn btn-primary">Register</a>
+        </li>
+        <li>
+            <a href="/Login/Login" class="btn btn-danger">Login</a>
+        </li>
+    </ul>
+</header>
+@Session["Message"];
+<h2>Various Events</h2>
+<table class="table">
+    <tr>
+        <th>
+            Past Events
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Date < System.DateTime.Now)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Title, "Details", new { id = item.EventID })
+                </td>
+            </tr>
+        }
+    }
+    <br />
+    <tr>
+        <th>
+            UpComing Events
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.Date > System.DateTime.Now)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Title, "Details", new { id = item.EventID })
+                </td>
+            </tr>
+        }
+    }
+</table>
+

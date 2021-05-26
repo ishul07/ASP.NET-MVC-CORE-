@@ -1,0 +1,57 @@
+﻿@model  IEnumerable<DB.Event>
+
+@{
+    ViewBag.Title = "IndexLoginUsers";
+}
+<header class="navbar">
+    <ul >
+        <li>
+            <a href="/Event/Index" class="btn btn-primary">My Events</a>
+        </li>
+        <li>
+            <a href="/Event/EventsInvitedTo" class="btn btn-primary">Events Invited To</a>
+        </li>
+        <li>
+            <a href="/Event/Create" class="btn btn-primary">Create Event</a>
+        </li>
+    </ul>
+</header>
+<h2>Various Events</h2>
+<table class="table">
+    <tr>
+        <th>
+            Past Events
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Date < System.DateTime.Now)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Title, "Details", new { id = item.EventID })
+                </td>
+            </tr>
+        }
+    }
+    <br />
+    <tr>
+        <th>
+            UpComing Events
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.Date > System.DateTime.Now)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Title, "Details", new { id = item.EventID })
+                </td>
+            </tr>
+        }
+    }
+</table>
+
